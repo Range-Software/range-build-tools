@@ -1,0 +1,37 @@
+@PROJECT_HUMAN_NAME@ License:
+@PROJECT_DESCRIPTION@
+Version @PROJECT_VERSION@
+
+--------------------------------------------------
+Copyright @PROJECT_YEAR@
+@PROJECT_AUTHOR@
+@PROJECT_AUTHOR_ADDRESS@
+@PROJECT_EMAIL@
+--------------------------------------------------
+
+LICENSE SECTIONS:
+
+  1. FULL LICENSE
+  2. ACKNOWLEDGEMENT
+
+
+--------------------------------------------------
+1. FULL LICENSE
+--------------------------------------------------
+
+@LICENSE_TEXT@
+
+--------------------------------------------------
+2. ACKNOWLEDGEMENT
+--------------------------------------------------
+
+YOU ACKNOWLEDGE THAT YOU HAVE READ THIS AGREEMENT, UNDERSTAND IT AND
+AGREE TO BE BOUND BY ITS TERMS AND CONDITIONS.
+
+--------------------------------------------------
+
+  Contact @PROJECT_AUTHOR@ as follows with any questions:
+
+  @PROJECT_AUTHOR@
+  @PROJECT_AUTHOR_ADDRESS@
+  Email: @PROJECT_EMAIL@

@@ -1,0 +1,45 @@
+function Component() {}
+
+Component.prototype.createOperations = function() {
+    component.createOperations();
+
+    var targetFileBase = "@IFW_QS_TARGET_FILE_BASE@";
+    var targetNameBase = "@IFW_QS_TARGET_NAME_BASE@";
+    var targetDir = installer.value("TargetDir");
+
+    if (installer.value("os") === "win") {
+        var userProfile = installer.environmentVariable("USERPROFILE");
+        var startMenuDir = installer.value("StartMenuDir");
+
+        component.addOperation("CreateShortcut",
+                               targetDir + "/bin/" + targetFileBase,
+                               startMenuDir + "/" + targetNameBase + ".lnk",
+                               "workingDirectory=" + targetDir,
+                               "description=" + targetNameBase);
+        component.addOperation("CreateShortcut",
+                               targetDir + "/bin/" + targetFileBase,
+                               userProfile + "/Desktop/" + targetNameBase + ".lnk",
+                               "workingDirectory=" + targetDir,
+                               "description=" + targetNameBase);
+        component.addOperation("CreateShortcut",
+                               targetDir + "/maintenancetool.exe",
+                               startMenuDir + "/" + targetNameBase + " maintenance tool.lnk",
+                               "workingDirectory=" + targetDir,
+                               "description=" + targetNameBase + " Maintenance tool");
+    }
+
+    if (installer.value("os") === "x11") {
+        component.addOperation("CreateDesktopEntry",
+                               targetFileBase + ".desktop",
+                               "Type=Application\nName=" + targetNameBase + "\nExec=" + targetDir + "/bin/" + targetFileBase + "\nPath=" + targetDir + "/bin\nTerminal=false\nIcon=range-" + targetFileBase);
+        component.addOperation("InstallIcons", targetDir + "/icons");
+        component.addOperation("Execute", "chmod", "+x", targetDir + "/bin/" + targetFileBase);
+    }
+
+    if (installer.value("os") === "mac") {
+        component.addOperation("Execute",
+                               "ln", "-s", "-v", targetDir + "/" + targetFileBase + ".app", "/Applications/" + targetFileBase + ".app",
+                               "UNDOEXECUTE",
+                               "rm", "-vf", "/Applications/" + targetFileBase + ".app");
+    }
+}
