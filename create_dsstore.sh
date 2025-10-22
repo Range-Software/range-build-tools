@@ -152,7 +152,14 @@ cp "$mountDir/.DS_Store" "$dsStore"
 assert_success $? "Failed to extract .DS_Store" true
 
 # Clean up
-hdiutil detach "$mountDir" > /dev/null && \
+max_attempts=5
+for attempt in $(seq 1 $max_attempts); do
+  hdiutil detach "$mountDir" && break && \
+  sleep 2 && \
+  if [ $attempt -eq $max_attempts ]; then
+    hdiutil detach -force "$mountDir"
+  fi
+done
 rm -f "$DMG_NAME"
 assert_success $? "Failed to cleanup" true
 
