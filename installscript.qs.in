@@ -1,5 +1,43 @@
 function Component() {}
 
+function ensureDir(path) {
+    component.addOperation("Mkdir", path);
+}
+
+function copyDesktopForUser() {
+    if (installer.value("os") !== "x11")
+        return;
+
+    var targetDir = installer.value("TargetDir");
+    var home = QDir.homePath();
+    var appsDir = home + "/.local/share/applications";
+    var iconsDir = home + "/.local/share/icons/hicolor/256x256/apps";
+
+    ensureDir(appsDir);
+    ensureDir(home + "/.local/share/icons");
+    ensureDir(home + "/.local/share/icons/hicolor");
+    ensureDir(home + "/.local/share/icons/hicolor/256x256");
+    ensureDir(iconsDir);
+
+    var srcTemplate = targetDir + "/@PROJECT_PACKAGE_NAME@.desktop.ifw";
+    var dstDesktop  = appsDir + "/@PROJECT_PACKAGE_NAME@.desktop";
+    var iconSrc     = targetDir + "/@PROJECT_TARGET_NAME@/pixmaps/@PROJECT_PACKAGE_NAME@.png";
+    var iconDst     = iconsDir + "/@PROJECT_PACKAGE_NAME@.png";
+
+    // Copy the icon to user's icon theme
+    component.addOperation("Copy", iconSrc, iconDst);
+
+    // Copy template and replace placeholders with real paths
+    component.addOperation("Copy", srcTemplate, dstDesktop);
+    component.addOperation("Replace", dstDesktop, "@EXEC_PATH@",  targetDir + "/bin/@IFW_QS_TARGET_FILE_BASE@");
+    component.addOperation("Replace", dstDesktop, "@ICON_PATH@",  iconDst);
+
+    // Try to refresh desktop/icon caches (best-effort)
+    component.addOperation("Execute", "update-desktop-database", appsDir, "||", "true");
+    component.addOperation("Execute", "xdg-desktop-menu", "forceupdate", "||", "true");
+    component.addOperation("Execute", "gtk-update-icon-cache", "-q", home + "/.local/share/icons/hicolor", "||", "true");
+}
+
 Component.prototype.createOperations = function() {
     component.createOperations();
 
@@ -42,4 +80,6 @@ Component.prototype.createOperations = function() {
                                "UNDOEXECUTE",
                                "rm", "-vf", "/Applications/" + targetFileBase + ".app");
     }
+
+    copyDesktopForUser();
 }
