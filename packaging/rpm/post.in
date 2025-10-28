@@ -1,0 +1,24 @@
+#!/bin/sh
+# $1 is 1 on upgrade, 0 on fresh install for %post (rpm behavior varies; safe to ignore)
+APP_DESKTOP="@PROJECT_PACKAGE_NAME@.desktop"
+SRC="/opt/@PROJECT_FAMILY_NAME@/@PROJECT_SHORT_REL_NAME@/$APP_DESKTOP"
+DST="/usr/share/applications/$APP_DESKTOP"
+
+if [ -f "$SRC" ]; then
+  install -D -m 0644 "$SRC" "$DST"
+fi
+
+if command -v update-desktop-database >/dev/null 2>&1; then
+  update-desktop-database -q || :
+fi
+
+ICON_SRC="/opt/@PROJECT_FAMILY_NAME@/@PROJECT_SHORT_REL_NAME@/@PROJECT_PACKAGE_NAME@.svg"
+ICON_DST="/usr/share/icons/hicolor/scalable/apps/@PROJECT_PACKAGE_NAME@.svg"
+if [ -f "$ICON_SRC" ]; then
+  install -D -m 0644 "$ICON_SRC" "$ICON_DST"
+fi
+command -v update-desktop-database >/dev/null 2>&1 && update-desktop-database -q || :
+command -v gtk-update-icon-cache >/dev/null 2>&1 && gtk-update-icon-cache -q /usr/share/icons/hicolor || :
+
+exit 0
+

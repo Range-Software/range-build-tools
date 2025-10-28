@@ -1,0 +1,29 @@
+#!/bin/sh
+set -e
+
+APP_DESKTOP="@PROJECT_PACKAGE_NAME@.desktop"
+DST="/usr/share/applications/$APP_DESKTOP"
+
+# prerm is called with: remove|upgrade|deconfigure
+case "$1" in
+  remove|deconfigure|upgrade)
+    if [ -f "$DST" ]; then
+      rm -f "$DST"
+    fi
+    if command -v update-desktop-database >/dev/null 2>&1; then
+      update-desktop-database -q || true
+    fi
+  ;;
+esac
+
+# Remove theme icon on uninstall/upgrade
+ICON_DST="/usr/share/icons/hicolor/scalable/apps/@PROJECT_PACKAGE_NAME@.svg"
+case "$1" in
+  remove|deconfigure|upgrade)
+    [ -f "$ICON_DST" ] && rm -f "$ICON_DST"
+    command -v gtk-update-icon-cache >/dev/null 2>&1 && gtk-update-icon-cache -q /usr/share/icons/hicolor || true
+  ;;
+esac
+
+exit 0
+

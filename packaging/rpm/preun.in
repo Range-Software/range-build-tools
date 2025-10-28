@@ -1,0 +1,23 @@
+#!/bin/sh
+# In RPM scripts, $1 == 0 means uninstall, $1 == 1 means upgrade
+APP_DESKTOP="@PROJECT_PACKAGE_NAME@.desktop"
+DST="/usr/share/applications/$APP_DESKTOP"
+
+if [ "$1" -eq 0 ]; then
+  # Uninstall
+  if [ -f "$DST" ]; then
+    rm -f "$DST"
+  fi
+  if command -v update-desktop-database >/dev/null 2>&1; then
+    update-desktop-database -q || :
+  fi
+fi
+
+if [ "$1" -eq 0 ]; then
+  ICON_DST="/usr/share/icons/hicolor/scalable/apps/@PROJECT_PACKAGE_NAME@.svg"
+  [ -f "$ICON_DST" ] && rm -f "$ICON_DST"
+  command -v gtk-update-icon-cache >/dev/null 2>&1 && gtk-update-icon-cache -q /usr/share/icons/hicolor || :
+fi
+
+exit 0
+
