@@ -2,7 +2,7 @@
 set -e
 
 APP_DESKTOP="@PROJECT_PACKAGE_NAME@.desktop"
-SRC="/opt/@PROJECT_FAMILY_NAME@/@PROJECT_SHORT_REL_NAME@/$APP_DESKTOP"
+SRC="/opt/@PROJECT_FAMILY_NAME@/@PROJECT_SHORT_REL_NAME@/desktop/$APP_DESKTOP"
 DST="/usr/share/applications/$APP_DESKTOP"
 
 # Install system-wide desktop entry
@@ -16,7 +16,7 @@ if command -v update-desktop-database >/dev/null 2>&1; then
 fi
 
 # Install theme icon for GNOME
-ICON_SRC="/opt/@PROJECT_FAMILY_NAME@/@PROJECT_SHORT_REL_NAME@/@PROJECT_PACKAGE_NAME@.svg"
+ICON_SRC="/opt/@PROJECT_FAMILY_NAME@/@PROJECT_SHORT_REL_NAME@/pixmaps/@PROJECT_PACKAGE_NAME@.svg"
 ICON_DST="/usr/share/icons/hicolor/scalable/apps/@PROJECT_PACKAGE_NAME@.svg"
 if [ -f "$ICON_SRC" ]; then
   install -D -m 0644 "$ICON_SRC" "$ICON_DST"
