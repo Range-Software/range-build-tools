@@ -46,6 +46,9 @@ qtPlatformsDir="plugins/platforms"
 qtPlatformThemesDir="plugins/platformthemes"
 qtTlsDir="plugins/tls"
 qtXcbGlIntegrationsDir="plugins/xcbglintegrations"
+qtWaylandDecorationClientDir="plugins/wayland-decoration-client"
+qtWaylandGraphicsIntegrationClientDir="plugins/wayland-graphics-integration-client"
+qtWaylandShellIntegrationDir="plugins/wayland-shell-integration"
 onlyQt=false
 onlyQtCore=false
 
@@ -144,6 +147,12 @@ then
     echo_e "Qt directory '$qtDir/$qtXcbGlIntegrationsDir' not found"
     exit 1
 fi
+if [ "$onlyQtCore" != "true" ] && [ -d "$qtDir/$qtWaylandDecorationClientDir" ]
+then
+    hasWayland=true
+else
+    hasWayland=false
+fi
 
 echo $executable
 executable=$(realPath "$executable")
@@ -165,6 +174,12 @@ then
     touch_dir "$installToDir/$qtImageFormatsDir" true
     touch_dir "$installToDir/$qtPlatformThemesDir" true
     touch_dir "$installToDir/$qtXcbGlIntegrationsDir" true
+    if [ "$hasWayland" = "true" ]
+    then
+        touch_dir "$installToDir/$qtWaylandDecorationClientDir" true
+        touch_dir "$installToDir/$qtWaylandGraphicsIntegrationClientDir" true
+        touch_dir "$installToDir/$qtWaylandShellIntegrationDir" true
+    fi
 fi
 
 getLibraries()
@@ -178,7 +193,11 @@ getLibraries()
     local _filesToCheck="$executable $qtDir/$qtPlatformsDir/*.so $qtDir/$qtTlsDir/*.so"
     if [ "$onlyQtCore" != "true" ]
     then
-        _filesToCheck+=" $qtDir/$qtImageFormatsDir/*.so $qtDir/$qtPlatformThemesDir/*.so \"$qtDir/$qtXcbGlIntegrationsDir/*.so"
+        _filesToCheck+=" $qtDir/$qtImageFormatsDir/*.so $qtDir/$qtPlatformThemesDir/*.so $qtDir/$qtXcbGlIntegrationsDir/*.so"
+        if [ "$hasWayland" = "true" ]
+        then
+            _filesToCheck+=" $qtDir/$qtWaylandDecorationClientDir/*.so $qtDir/$qtWaylandGraphicsIntegrationClientDir/*.so $qtDir/$qtWaylandShellIntegrationDir/*.so"
+        fi
     fi
 
     for lddRecord in $(ldd $_filesToCheck | grep -e "^\s*lib$onlyQtGrep" | sed 's/^\s\+//;s/\s\+=>\s\+/,/;s/\s\+.*//')
@@ -205,6 +224,12 @@ then
     cp -v "$qtDir/$qtImageFormatsDir/"*.so "$installToDir/$qtImageFormatsDir" && \
     cp -v "$qtDir/$qtPlatformThemesDir/"*.so "$installToDir/$qtPlatformThemesDir" && \
     cp -v "$qtDir/$qtXcbGlIntegrationsDir/"*.so "$installToDir/$qtXcbGlIntegrationsDir"
+    if [ "$hasWayland" = "true" ]
+    then
+        cp -v "$qtDir/$qtWaylandDecorationClientDir/"*.so "$installToDir/$qtWaylandDecorationClientDir" && \
+        cp -v "$qtDir/$qtWaylandGraphicsIntegrationClientDir/"*.so "$installToDir/$qtWaylandGraphicsIntegrationClientDir" && \
+        cp -v "$qtDir/$qtWaylandShellIntegrationDir/"*.so "$installToDir/$qtWaylandShellIntegrationDir"
+    fi
 fi && \
 cp -v "$qtDir/$qtPlatformsDir/"*.so "$installToDir/$qtPlatformsDir" && \
 cp -v "$qtDir/$qtTlsDir/"*.so "$installToDir/$qtTlsDir"
