@@ -1,0 +1,17 @@
+# Sign DMG files after CPack creates them
+# This script is called by CPack via CPACK_POST_BUILD_SCRIPTS
+
+set(CODESIGN_ID "@CODESIGN_ID@")
+
+foreach(package_file IN LISTS CPACK_PACKAGE_FILES)
+    if(package_file MATCHES "\\.dmg$")
+        message(STATUS "Signing DMG: ${package_file}")
+        execute_process(
+            COMMAND /usr/bin/codesign -vvv --force --timestamp --sign "${CODESIGN_ID}" "${package_file}"
+            RESULT_VARIABLE sign_result
+        )
+        if(NOT sign_result EQUAL 0)
+            message(FATAL_ERROR "Failed to sign DMG: ${package_file}")
+        endif()
+    endif()
+endforeach()
