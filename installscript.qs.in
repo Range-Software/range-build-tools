@@ -64,6 +64,25 @@ Component.prototype.createOperations = function() {
                                startMenuDir + "/" + targetNameBase + " maintenance tool.lnk",
                                "workingDirectory=" + targetDir,
                                "description=" + targetNameBase + " Maintenance tool");
+
+        // Register in Add/Remove Programs
+        var regKey = "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\@PROJECT_PACKAGE_NAME@";
+        component.addOperation("Execute",
+                               "reg", "add", regKey, "/v", "DisplayName", "/d", "@PROJECT_HUMAN_NAME@", "/f",
+                               "UNDOEXECUTE",
+                               "reg", "delete", regKey, "/f");
+        component.addOperation("Execute",
+                               "reg", "add", regKey, "/v", "UninstallString", "/d",
+                               targetDir + "/maintenancetool.exe", "/f");
+        component.addOperation("Execute",
+                               "reg", "add", regKey, "/v", "DisplayIcon", "/d",
+                               targetDir + "/bin/" + targetFileBase, "/f");
+        component.addOperation("Execute",
+                               "reg", "add", regKey, "/v", "DisplayVersion", "/d", "@PROJECT_VERSION@", "/f");
+        component.addOperation("Execute",
+                               "reg", "add", regKey, "/v", "Publisher", "/d", "@PROJECT_AUTHOR@", "/f");
+        component.addOperation("Execute",
+                               "reg", "add", regKey, "/v", "URLInfoAbout", "/d", "@PROJECT_WWW@", "/f");
     }
 
     if (installer.value("os") === "x11") {

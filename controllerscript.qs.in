@@ -1,0 +1,13 @@
+function Controller() {}
+
+Controller.prototype.IntroductionPageCallback = function() {
+    if (!installer.isInstaller())
+        return;
+
+    var targetDir = installer.value("TargetDir");
+    var maintenanceTool = targetDir + "/maintenancetool.exe";
+
+    if (installer.fileExists(maintenanceTool)) {
+        installer.execute(maintenanceTool, ["purge"]);
+    }
+}
