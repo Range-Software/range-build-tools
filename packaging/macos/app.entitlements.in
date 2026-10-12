@@ -5,6 +5,12 @@
 	<!-- Mandatory for the Mac App Store. -->
 	<key>com.apple.security.app-sandbox</key>
 	<true/>
+	<!-- Must match the provisioning profile embedded in the bundle; without them
+	     App Store Connect rejects the upload (ITMS-90886). -->
+	<key>com.apple.application-identifier</key>
+	<string>@MACOS_TEAM_ID@.@MACOS_BUNDLE_IDENTIFIER@</string>
+	<key>com.apple.developer.team-identifier</key>
+	<string>@MACOS_TEAM_ID@</string>
 	<!-- Range Cloud sessions, the AI assistant and the update check. -->
 	<key>com.apple.security.network.client</key>
 	<true/>
