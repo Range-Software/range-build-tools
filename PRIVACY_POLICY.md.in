@@ -1,0 +1,133 @@
+# @PROJECT_HUMAN_NAME@ Privacy Policy
+
+@PROJECT_RELEASE_DATE@ - @PROJECT_AUTHOR@
+
+## Introduction
+
+@PROJECT_HUMAN_NAME@ is a desktop finite element analysis application published by @PROJECT_AUTHOR@, @PROJECT_FAMILY_NAME@ ("we", "us"), @PROJECT_AUTHOR_ADDRESS@. We are the controller of any personal data described in this policy.
+
+This policy applies to the @PROJECT_HUMAN_NAME@ application, including the version distributed through the Microsoft Store, its bundled solver (fea-solver), and the @PROJECT_FAMILY_NAME@ online services the application connects to. It does not apply to third-party websites or services that you choose to connect to.
+
+Effective date: @PROJECT_RELEASE_DATE@.
+
+## Summary
+
+@PROJECT_HUMAN_NAME@ works offline. Your models, meshes and results stay on your device unless you choose to use an online feature. We do not sell personal data, we do not show ads, and the application contains no third-party analytics or tracking.
+
+| Feature | What leaves your device | Sent to | When |
+| --- | --- | --- | --- |
+| Usage information | Application log of the previous session | @PROJECT_FAMILY_NAME@ | At start-up, only if "Send usage information" is enabled |
+| Crash report | Application log of the crashed session and your optional comment | @PROJECT_FAMILY_NAME@ | Only when you click "Send crash report" |
+| Range Cloud | Account name, certificate details, files and jobs you submit | @PROJECT_FAMILY_NAME@ | Only when you register and use cloud functions |
+| AI assistant | Your questions and the context the assistant needs | The AI provider you configure (OpenAI or Anthropic), or Range Cloud | Only when you set up and use the assistant |
+
+Every online feature can be turned off or simply not used. The application remains fully usable without them.
+
+## Information stored on your device
+
+The application stores the following only on your device, in your user profile. We have no access to it.
+
+- **Models and results**: geometry, meshes, materials, boundary conditions, solver input and results you create or import.
+- **Settings**: preferences, recent files, proxy settings, and your choices for usage information.
+- **Cloud session data**: server addresses, your private key, client certificate and trust store used to connect to Range Cloud.
+- **AI assistant settings**: the provider, model and API key you enter. The API key is kept in your local settings and is sent only to the provider it belongs to.
+- **Log files**: technical records of what the application did, such as start-up steps, file paths opened, solver progress, warnings and errors. Logs are rotated and older logs are overwritten.
+
+You can delete this information at any time by removing your files, uninstalling the application and deleting its data folder in your user profile.
+
+## Information sent over the network
+
+The application connects to the internet only for the features below. All connections to @PROJECT_FAMILY_NAME@ servers (@PROJECT_WWW_DOMAIN@) are encrypted with TLS. If you configure a proxy, traffic passes through it.
+
+### Usage information
+
+When "Send usage information" is enabled, the application sends the log file of the previous session to @PROJECT_FAMILY_NAME@ at start-up. You choose this on the first-run screen and can change it at any time in the application settings. Logs describe how the software ran (actions, timings, warnings, errors, version, operating system). They do not contain your model data. They can contain file and folder paths, which may include your computer user name.
+
+### Crash reports
+
+If the application ended unexpectedly, the next start shows the log from the crashed session. You can review it, add a comment and decide whether to send it. Nothing is sent unless you click "Send crash report".
+
+### Range Cloud
+
+Range Cloud lets you store files and run jobs on @PROJECT_FAMILY_NAME@ servers. It is used only if you register. When you do, we process:
+
+- the user name you register and the details you put in your certificate request (common name, and optionally country, state, location, organization and organization unit);
+- files you upload, with their names, sizes, versions, tags and access rights;
+- jobs you submit and their results;
+- technical connection data such as IP address and request times, needed to run the service and keep it secure.
+
+### AI assistant
+
+The AI assistant is optional and is off until you configure it.
+
+- **With your own API key** (OpenAI or Anthropic): your questions, the conversation so far, and context the application adds to help the assistant (such as help documentation and information about your current task) are sent directly from your device to that provider. Your use is governed by your agreement with the provider and its privacy policy: [OpenAI](https://openai.com/policies/privacy-policy), [Anthropic](https://www.anthropic.com/legal/privacy).
+- **Through Range Cloud**: your query is sent to @PROJECT_FAMILY_NAME@, which forwards it to an AI provider to produce the answer.
+
+Do not enter personal or confidential information in the assistant unless you are comfortable sharing it with the provider.
+
+### Software updates
+
+The Microsoft Store version does not check for or download updates itself. Updates are delivered by the Microsoft Store. Versions downloaded from our website may check @PROJECT_WWW_DOMAIN@ for new releases; this sends a list request and no personal data.
+
+## How we use information
+
+We use the information we receive only for the purposes below. We do not use it for advertising or profiling, and we make no automated decisions with legal or similar effects on you.
+
+| Purpose | Information | Legal basis (GDPR) |
+| --- | --- | --- |
+| Fix bugs and improve the software | Usage logs, crash reports and comments | Your consent, which you can withdraw in settings |
+| Provide Range Cloud | Account, certificate, files, jobs, connection data | Performance of a contract with you |
+| Answer AI queries sent through Range Cloud | Your queries and responses | Performance of a contract with you |
+| Keep services secure and prevent abuse | Connection data and server logs | Our legitimate interest in running a secure service |
+| Reply to you when you contact us | Your email and message | Our legitimate interest in answering you |
+| Meet legal obligations | Any of the above, as required | Legal obligation |
+
+## Sharing
+
+We do not sell or rent personal data and do not share it for advertising. We share it only in these cases:
+
+- **Hosting providers** that run our servers on our behalf, under contracts that limit use to providing the service.
+- **AI providers**, only for queries you send through Range Cloud, to generate the answer.
+- **Other Range Cloud users**, only for files or jobs whose access rights you set to share with them.
+- **Authorities**, when the law requires it, or to protect our rights, our users or the public.
+- **A successor**, if the @PROJECT_HUMAN_NAME@ business is transferred. This policy would continue to apply to your information.
+
+When you install from the Microsoft Store, Microsoft processes purchase and installation data under the [Microsoft Privacy Statement](https://privacy.microsoft.com/privacystatement). We do not receive your Microsoft account details through the application.
+
+## Retention, security and transfers
+
+**Retention.** We keep usage logs and crash reports for up to 24 months, then delete them. We keep Range Cloud account data, files and jobs while your account is active and delete them within 90 days after you close the account or ask us to delete it. We may keep limited records longer where the law requires it.
+
+**Security.** Connections to our servers use TLS with client certificates. Access to stored data is limited to people who need it to run the service. No method of transfer or storage is completely secure, but we work to protect your information and will notify you and the authorities of a breach where the law requires.
+
+**Where data is processed.** @PROJECT_FAMILY_NAME@ is based in the Czech Republic, in the European Union. AI providers you use may process data in the United States or other countries. Where data leaves the European Economic Area, we rely on adequacy decisions or the European Commission's Standard Contractual Clauses.
+
+**Children.** @PROJECT_HUMAN_NAME@ is an engineering tool for professionals and students. It is not directed at children under 16, and we do not knowingly collect their personal data. If you believe a child has given us personal data, contact us and we will delete it.
+
+## Your choices and rights
+
+**In the application:**
+
+- Turn usage information on or off in the application settings ("Send usage information").
+- Review each crash report before sending it, or close the dialog to send nothing.
+- Use Range Cloud and the AI assistant only if you want to. Remove an AI provider's settings to stop sending it data.
+- Delete your cloud files from the application at any time.
+
+**Under data protection law** (including the EU and UK GDPR and US state laws such as the CCPA), you can ask us to:
+
+- give you access to, or a copy of, your personal data;
+- correct inaccurate data;
+- delete your data or close your Range Cloud account;
+- restrict or object to processing;
+- send your data to you or another provider in a portable format;
+- withdraw consent at any time, without affecting earlier processing.
+
+Email us at the address below. We answer within 30 days and may need to confirm your identity first. We will not treat you differently for using these rights. You can also complain to a data protection authority. In the Czech Republic, that is the [Office for Personal Data Protection (ÚOOÚ)](https://uoou.gov.cz).
+
+## Changes and contact
+
+We may update this policy when the application or the law changes. We will post the new version at the same address with a new effective date. For significant changes, we will also tell you in the application or by email before they take effect.
+
+For questions or requests about privacy, contact:
+
+@PROJECT_AUTHOR@, @PROJECT_FAMILY_NAME@ @PROJECT_AUTHOR_ADDRESS@ Email: <@PROJECT_EMAIL@> Website: [www.@PROJECT_WWW_DOMAIN@](@PROJECT_WWW@)
