@@ -1,3 +1,12 @@
+## Version 1.1.1
+
+### Bug fixes
+
+- `create_dsstore.sh` retried detaching the temporary disk image without waiting
+  between attempts and never forced the detach, because the retry commands were
+  chained with `&&` and stopped at the first failed attempt. It now waits 2 seconds
+  between attempts and forces the detach on the last one
+
 ## Version 1.1.0
 
 ### Improvements
